@@ -1,0 +1,15 @@
+node_modules
+.next
+.nuxt
+.cache
+.parcel-cache
+.nyc_output
+dist
+build
+coverage
+.vscode
+.DS_Store
+*.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
