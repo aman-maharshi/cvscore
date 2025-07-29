@@ -5,9 +5,12 @@ import Navbar from "~/components/navbar"
 import { convertPdfToImage } from "~/lib/pdf2img"
 import { usePuterStore } from "~/lib/puter"
 import { generateUUID } from "~/lib/utils"
+import { useNavigate } from "react-router"
 
 const Upload = () => {
   const { auth, isLoading, fs, ai, kv } = usePuterStore()
+  const navigate = useNavigate()
+
   const [isProcessing, setIsProcessing] = useState(false)
   const [statusText, setStatusText] = useState("")
   const [file, setFile] = useState<File | null>(null)
@@ -71,7 +74,7 @@ const Upload = () => {
     await kv.set(`resume:${uuid}`, JSON.stringify(data))
     setStatusText("Analysis complete, redirecting...")
     console.log(data)
-    // navigate(`/resume/${uuid}`)
+    navigate(`/resume/${uuid}`)
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
