@@ -53,7 +53,7 @@ const Resume = () => {
         <div className="min-h-screen">
           {/* Modern Header with Back Navigation */}
           <div>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
                 <Link
                   to="/"
@@ -81,13 +81,13 @@ const Resume = () => {
           </div>
 
           {/* Main Content */}
-          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl p-4">
             <div className="flex w-full flex-row gap-8 max-lg:flex-col-reverse">
               {/* Resume Preview Section */}
               <section className="sticky top-8 h-fit w-1/2 max-lg:w-full">
                 {imageUrl && resumeUrl && (
                   <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                    {/* <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div> */}
                     <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="block">
                       <img
                         src={imageUrl}

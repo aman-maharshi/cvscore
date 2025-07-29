@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
     <main className="min-h-screen bg-neutral-100">
       <Navbar />
 
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col pt-16">
         <div className="flex-1">{children}</div>
 
         <footer className="mt-auto bg-transparent py-4">
