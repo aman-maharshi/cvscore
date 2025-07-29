@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home"
-import Navbar from "~/components/navbar"
+import Layout from "~/components/Layout"
 import ResumeCard from "~/components/ResumeCard"
 import ProtectedRoute from "~/components/ProtectedRoute"
 import { usePuterStore } from "~/lib/puter"
@@ -36,13 +36,11 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="bg-[url('/images/bg-main.svg')] bg-cover">
-      <Navbar />
-
+    <Layout>
       <section className="main-section">
         {!auth.isAuthenticated ? (
           // Welcome section for non-authenticated users
-          <div className="page-heading py-16">
+          <div className="page-heading py-8">
             <h1 className="mb-6 text-center text-4xl font-bold">Welcome to CVScore</h1>
             <div className="mx-auto max-w-3xl space-y-6 text-center">
               <p className="text-xl leading-relaxed text-gray-700">
@@ -101,7 +99,7 @@ export default function Home() {
         ) : (
           // Existing content for authenticated users
           <ProtectedRoute>
-            <div className="page-heading py-16">
+            <div className="page-heading py-8">
               <h1>Your Resume Dashboard</h1>
               {!loadingResumes && resumes?.length === 0 ? (
                 <h2>No resumes found. Upload your first resume to get feedback.</h2>
@@ -133,6 +131,6 @@ export default function Home() {
           </ProtectedRoute>
         )}
       </section>
-    </main>
+    </Layout>
   )
 }

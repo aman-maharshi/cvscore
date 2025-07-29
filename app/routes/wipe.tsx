@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { usePuterStore } from "~/lib/puter"
 import ProtectedRoute from "~/components/ProtectedRoute"
-import Navbar from "~/components/navbar"
+import Layout from "~/components/Layout"
 
 const WipeApp = () => {
   const { auth, isLoading, error, clearError, fs, ai, kv } = usePuterStore()
@@ -35,9 +35,7 @@ const WipeApp = () => {
   }
 
   return (
-    <main className="bg-[url('/images/bg-main.svg')] bg-cover">
-      <Navbar />
-
+    <Layout>
       <ProtectedRoute>
         <section className="main-section">
           <div className="page-heading">
@@ -72,7 +70,7 @@ const WipeApp = () => {
           </div>
         </section>
       </ProtectedRoute>
-    </main>
+    </Layout>
   )
 }
 
