@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { usePuterStore } from "~/lib/puter"
+import ProtectedRoute from "~/components/ProtectedRoute"
+import Navbar from "~/components/navbar"
 
 const WipeApp = () => {
   const { auth, isLoading, error, clearError, fs, ai, kv } = usePuterStore()
@@ -15,12 +17,6 @@ const WipeApp = () => {
   useEffect(() => {
     loadFiles()
   }, [])
-
-  useEffect(() => {
-    if (!isLoading && !auth.isAuthenticated) {
-      navigate("/auth?next=/wipe")
-    }
-  }, [isLoading])
 
   const handleDelete = async () => {
     files.forEach(async (file) => {
@@ -39,25 +35,44 @@ const WipeApp = () => {
   }
 
   return (
-    <div>
-      Authenticated as: {auth.user?.username}
-      <div>Existing files:</div>
-      <div className="flex flex-col gap-4">
-        {files.map((file) => (
-          <div key={file.id} className="flex flex-row gap-4">
-            <p>{file.name}</p>
+    <main className="bg-[url('/images/bg-main.svg')] bg-cover">
+      <Navbar />
+
+      <ProtectedRoute>
+        <section className="main-section">
+          <div className="page-heading">
+            <h2>Clear all stored data and files</h2>
+
+            <div className="mt-8 rounded-lg bg-white/80 p-6 shadow-lg backdrop-blur-sm">
+              <div className="mb-4">
+                <h3 className="mb-2 text-lg font-semibold text-gray-800">Existing Files:</h3>
+                <div className="space-y-2">
+                  {files.length === 0 ? (
+                    <p className="text-gray-600">No files found</p>
+                  ) : (
+                    files.map((file) => (
+                      <div key={file.id} className="flex items-center gap-2 text-sm">
+                        <span className="text-gray-600">•</span>
+                        <span className="text-gray-800">{file.name}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <button
+                  className="cursor-pointer rounded-md bg-red-500 px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-red-600"
+                  onClick={() => handleDelete()}
+                >
+                  Wipe All Data
+                </button>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-      <div>
-        <button
-          className="cursor-pointer rounded-md bg-blue-500 px-4 py-2 text-white"
-          onClick={() => handleDelete()}
-        >
-          Wipe App Data
-        </button>
-      </div>
-    </div>
+        </section>
+      </ProtectedRoute>
+    </main>
   )
 }
 
