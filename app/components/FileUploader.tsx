@@ -10,7 +10,6 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const file = acceptedFiles[0] || null
-
       onFileSelect?.(file)
     },
     [onFileSelect]
@@ -28,38 +27,74 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
   const file = acceptedFiles[0] || null
 
   return (
-    <div className="gradient-border w-full">
+    <div className="w-full">
       <div {...getRootProps()}>
         <input {...getInputProps()} />
 
-        <div className="cursor-pointer space-y-4">
+        <div className="cursor-pointer">
           {file ? (
-            <div className="uploader-selected-file" onClick={(e) => e.stopPropagation()}>
-              <img src="/images/pdf.png" alt="pdf" className="size-10" />
-              <div className="flex items-center space-x-3">
-                <div>
-                  <p className="max-w-xs truncate text-sm font-medium text-gray-700">{file.name}</p>
-                  <p className="text-sm text-gray-500">{formatSize(file.size)}</p>
+            <div
+              className="group relative overflow-hidden rounded-xl border-2 border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-gray-300 hover:shadow-md"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-50">
+                    <img src="/images/pdf.png" alt="pdf" className="h-8 w-8" />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="max-w-xs truncate text-sm font-semibold text-gray-900">
+                      {file.name}
+                    </p>
+                    <p className="text-xs text-gray-500">{formatSize(file.size)}</p>
+                  </div>
                 </div>
+                <button
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-400 transition-all duration-200 group-hover:bg-gray-200 hover:bg-red-50 hover:text-red-500"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onFileSelect?.(null)
+                  }}
+                >
+                  <img src="/icons/cross.svg" alt="remove" className="h-4 w-4" />
+                </button>
               </div>
-              <button
-                className="cursor-pointer p-2"
-                onClick={(e) => {
-                  onFileSelect?.(null)
-                }}
-              >
-                <img src="/icons/cross.svg" alt="remove" className="h-4 w-4" />
-              </button>
             </div>
           ) : (
-            <div>
-              <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center">
-                <img src="/icons/info.svg" alt="upload" className="size-20" />
+            <div
+              className={`relative overflow-hidden rounded-xl border-2 border-dashed transition-all duration-300 ${
+                isDragActive
+                  ? "border-blue-400 bg-blue-50 shadow-lg"
+                  : "border-gray-300 bg-gray-50 hover:border-gray-400 hover:bg-gray-100"
+              } `}
+            >
+              <div className="flex min-h-[160px] flex-col items-center justify-center p-8 text-center">
+                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm">
+                  <img
+                    src="/icons/info.svg"
+                    alt="upload"
+                    className={`h-8 w-8 transition-all duration-300 ${
+                      isDragActive ? "scale-110 text-blue-500" : "text-gray-400"
+                    }`}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <p className="text-lg font-semibold text-gray-700">
+                    {isDragActive ? "Drop your PDF here" : "Upload your resume"}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {isDragActive ? "Release to upload" : "Click to browse or drag and drop"}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    PDF files only • Max {formatSize(maxFileSize)}
+                  </p>
+                </div>
               </div>
-              <p className="text-lg text-gray-500">
-                <span className="font-semibold">Click to upload</span> or drag and drop
-              </p>
-              <p className="text-lg text-gray-500">PDF (max {formatSize(maxFileSize)})</p>
+
+              {/* Animated border effect */}
+              {isDragActive && (
+                <div className="absolute inset-0 animate-pulse rounded-xl border-2 border-blue-400 bg-blue-50 opacity-20"></div>
+              )}
             </div>
           )}
         </div>
@@ -67,4 +102,5 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
     </div>
   )
 }
+
 export default FileUploader

@@ -111,18 +111,20 @@ const Upload = () => {
 
             {!isProcessing && (
               <form id="upload-form" onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
-                <div className="form-div">
-                  <label htmlFor="company-name">Company Name</label>
-                  <input
-                    type="text"
-                    name="company-name"
-                    placeholder="Company Name"
-                    id="company-name"
-                  />
-                </div>
-                <div className="form-div">
-                  <label htmlFor="job-title">Job Title</label>
-                  <input type="text" name="job-title" placeholder="Job Title" id="job-title" />
+                <div className="flex w-full flex-col gap-4 md:flex-row">
+                  <div className="form-div flex-1">
+                    <label htmlFor="company-name">Company Name</label>
+                    <input
+                      type="text"
+                      name="company-name"
+                      placeholder="Company Name"
+                      id="company-name"
+                    />
+                  </div>
+                  <div className="form-div flex-1">
+                    <label htmlFor="job-title">Job Title</label>
+                    <input type="text" name="job-title" placeholder="Job Title" id="job-title" />
+                  </div>
                 </div>
                 <div className="form-div">
                   <label htmlFor="job-description">Job Description</label>
