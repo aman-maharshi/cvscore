@@ -1,8 +1,18 @@
-import { Link } from "react-router"
+import { Link, useLocation, useNavigate } from "react-router"
 import { usePuterStore } from "~/lib/puter"
 
 const Navbar = () => {
   const { auth, isLoading } = usePuterStore()
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  // Helper function to check if a link is active
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return location.pathname === "/"
+    }
+    return location.pathname.startsWith(path)
+  }
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur-sm">
@@ -23,7 +33,11 @@ const Navbar = () => {
           {auth.isAuthenticated && (
             <Link
               to="/upload"
-              className="primary-button flex w-fit items-center gap-2 transition-all duration-200 hover:shadow-md max-sm:px-3 max-sm:py-1.5 max-sm:text-sm"
+              className={`relative flex w-fit items-center gap-2 transition-all duration-200 hover:shadow-md max-sm:px-3 max-sm:py-1.5 max-sm:text-sm ${
+                isActive("/upload")
+                  ? "bg-gray-900 text-white shadow-md"
+                  : "text-gray-600 hover:bg-gray-100"
+              } rounded-lg px-4 py-2`}
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -34,13 +48,21 @@ const Navbar = () => {
                 />
               </svg>
               Upload Resume
+              {/* Active indicator */}
+              {isActive("/upload") && (
+                <div className="absolute -bottom-1 left-1/2 h-1 w-1/2 -translate-x-1/2 rounded-full bg-blue-500"></div>
+              )}
             </Link>
           )}
 
           {auth.isAuthenticated && (
             <Link
               to="/profile"
-              className="flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-gray-600 transition-all duration-200 hover:bg-gray-100 hover:text-gray-800 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm"
+              className={`relative flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 transition-all duration-200 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm ${
+                isActive("/profile")
+                  ? "bg-gray-900 text-white shadow-md"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -51,6 +73,10 @@ const Navbar = () => {
                 />
               </svg>
               <span className="max-sm:hidden">Profile</span>
+              {/* Active indicator */}
+              {isActive("/profile") && (
+                <div className="absolute -bottom-1 left-1/2 h-1 w-1/2 -translate-x-1/2 rounded-full bg-blue-500"></div>
+              )}
             </Link>
           )}
 
@@ -65,7 +91,10 @@ const Navbar = () => {
           ) : auth.isAuthenticated ? (
             <button
               className="flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-gray-600 transition-all duration-200 hover:bg-gray-100 hover:text-gray-800 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm"
-              onClick={auth.signOut}
+              onClick={() => {
+                auth.signOut()
+                navigate("/")
+              }}
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path

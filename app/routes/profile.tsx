@@ -42,10 +42,6 @@ const Profile = () => {
     }
   }
 
-  if (!auth.isAuthenticated || !auth.user) {
-    return null
-  }
-
   return (
     <Layout>
       <ProtectedRoute>
@@ -99,7 +95,7 @@ const Profile = () => {
                       />
                     </svg>
                   </div>
-                  <p className="text-xl font-semibold text-gray-900">{auth.user.username}</p>
+                  <p className="text-xl font-semibold text-gray-900">{auth.user?.username}</p>
                 </div>
               </div>
 
