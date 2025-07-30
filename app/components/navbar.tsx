@@ -29,14 +29,12 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <div className="flex items-center gap-4 max-sm:gap-2">
+        <div className="flex items-center gap-2">
           {auth.isAuthenticated && (
             <Link
               to="/upload"
-              className={`relative flex w-fit items-center gap-2 transition-all duration-200 hover:shadow-md max-sm:px-3 max-sm:py-1.5 max-sm:text-sm ${
-                isActive("/upload")
-                  ? "bg-gray-900 text-white shadow-md"
-                  : "text-gray-600 hover:bg-gray-100"
+              className={`relative flex w-fit items-center gap-2 transition-all duration-200 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm ${
+                isActive("/upload") ? "text-gray-800" : "text-gray-600"
               } rounded-lg px-4 py-2`}
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,9 +57,7 @@ const Navbar = () => {
             <Link
               to="/profile"
               className={`relative flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 transition-all duration-200 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm ${
-                isActive("/profile")
-                  ? "bg-gray-900 text-white shadow-md"
-                  : "text-gray-600 hover:bg-gray-100"
+                isActive("/profile") ? "text-gray-800" : "text-gray-600"
               }`}
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +86,7 @@ const Navbar = () => {
             </button>
           ) : auth.isAuthenticated ? (
             <button
-              className="flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-gray-600 transition-all duration-200 hover:bg-gray-100 hover:text-gray-800 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm"
+              className="flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-gray-600 transition-all duration-200 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm"
               onClick={() => {
                 auth.signOut()
                 navigate("/")
@@ -108,7 +104,7 @@ const Navbar = () => {
             </button>
           ) : (
             <button
-              className="primary-gradient hover:primary-gradient-hover flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-white transition-all duration-200 hover:shadow-md max-sm:px-3 max-sm:py-1.5 max-sm:text-sm"
+              className="primary-gradient flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-white transition-all duration-200 max-sm:px-3 max-sm:py-1.5 max-sm:text-sm"
               onClick={auth.signIn}
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

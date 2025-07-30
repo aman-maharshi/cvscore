@@ -99,7 +99,6 @@ const Upload = () => {
       <ProtectedRoute>
         <section className="main-section">
           <div className="page-heading">
-            <h1>Smart feedback for your dream job</h1>
             {isProcessing ? (
               <>
                 <h2>{statusText}</h2>

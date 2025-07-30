@@ -48,29 +48,7 @@ const Profile = () => {
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
           {/* Header Section */}
           <div className="mx-auto max-w-4xl px-4 pt-8 sm:px-6 lg:px-8">
-            <div className="mb-8">
-              <Link
-                to="/"
-                className="group flex items-center gap-3 rounded-xl px-4 py-2 text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-100 transition-all duration-200 group-hover:bg-gray-200">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium">Back to Dashboard</span>
-              </Link>
-            </div>
-
-            <div className="text-center">
-              <p className="text-3xl font-bold text-gray-900">Profile</p>
-              <p className="mt-2 text-lg text-gray-600">Your account information</p>
-            </div>
+            <h2 className="text-center">Profile</h2>
           </div>
 
           {/* Profile Content */}

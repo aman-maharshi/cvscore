@@ -100,7 +100,6 @@ export default function Home() {
           // Existing content for authenticated users
           <ProtectedRoute>
             <div className="page-heading py-8">
-              <h1>Your Resume Dashboard</h1>
               {!loadingResumes && resumes?.length === 0 ? (
                 <h2>No resumes found. Upload your first resume to get feedback.</h2>
               ) : (
